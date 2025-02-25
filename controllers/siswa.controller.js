@@ -8,8 +8,8 @@ const SECRET_KEY = "kantinnnnn";
 // register user as pelanggan
 exports.registerSiswa = async (req, res) => {
     try {
-        const { username, password, nama_siswa, alamat, telp, foto } = req.body;
-
+        const { username, password, nama_siswa, alamat, telp } = req.body;
+        const foto = req.file.filename;
         // pw
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -42,6 +42,7 @@ exports.loginSiswa = async (req, res) => {
         const { username, password } = req.body;
 
         const foundUser = await user.findOne({ where: { username } });
+        
         if (!foundUser || foundUser.role !== 'siswa') {
             return res.status(404).json({ message: 'User not found or not a siswa' });
         }

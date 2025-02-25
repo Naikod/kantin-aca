@@ -6,8 +6,8 @@ const { Op } = require('sequelize');
 
 exports.addMenu = async (req, res) => {
     try {
-        const { nama_makanan, harga, jenis, foto, deskripsi, stanID } = req.body;
-
+        const { nama_makanan, harga, jenis, deskripsi, stanID } = req.body;
+        const foto = req.file.filename;
         const newMenu = await menu.create({
             nama_makanan,
             harga,

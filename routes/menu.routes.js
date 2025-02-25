@@ -2,13 +2,15 @@ const express = require('express');
 const app = express();
 const menuController = require('../controllers/menu.controller');
 
+const upload = require('../utils/uploads');
+
 // Menambahkan menu
-app.post('/addmenu', menuController.addMenu);
+app.post('/addmenu', upload.single("foto"), menuController.addMenu);
 
 
 // Melihat semua meneu
 app.get('/:search', menuController.getMenu);
-app.post('/', menuController.addMenu);
+app.post('/', upload.single("foto"), menuController.addMenu);
 app.get('/', menuController.getAllMenus);
 app.put('/:id', menuController.updateMenu);
 app.delete('/:id', menuController.deleteMenu);

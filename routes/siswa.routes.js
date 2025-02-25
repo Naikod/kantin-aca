@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const siswaController = require('../controllers/siswa.controller');
 const auth = require('../auth/auth');
+const upload = require('../utils/uploads');
 
-app.post('/register', siswaController.registerSiswa); 
+app.post('/register',  upload.single("foto"), siswaController.registerSiswa); 
 app.post('/login', siswaController.loginSiswa); 
 app.put("/:id", siswaController.updateSiswa);      
 app.get("/:search", siswaController.getSiswa);
